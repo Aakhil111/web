@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMEX — Premium Web Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F8F5EF;
+    --cream-dark: #EDE8DF;
+    --gold: #B8995A;
+    --gold-light: #D4B97A;
+    --gold-pale: #F2EAD6;
+    --charcoal: #1C1C1C;
+    --muted: #6B6560;
+    --white: #FFFFFF;
+    --border: rgba(184,153,90,0.25);
+    --shadow: 0 8px 48px rgba(28,28,28,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.4rem 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(248,245,239,0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem; font-weight: 600;
+    letter-spacing: 0.12em; color: var(--charcoal); text-decoration: none;
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--charcoal) !important; color: var(--white) !important; padding: 0.65rem 1.6rem !important; border-radius: 2px; }
+  .nav-cta:hover { background: var(--gold) !important; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-top: 5rem; overflow: hidden; }
+
+  .hero-left { padding: 6rem 5% 6rem 6%; }
+
+  .hero-label {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+  }
+  .hero-label::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    font-weight: 300; line-height: 1.06; margin-bottom: 2rem;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 440px; margin-bottom: 3rem; line-height: 1.9; }
+
+  .hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center; margin-bottom: 3.5rem; }
+
+  .btn-primary {
+    background: var(--charcoal); color: var(--white); text-decoration: none;
+    padding: 1rem 2.4rem; font-size: 0.78rem; letter-spacing: 0.18em;
+    text-transform: uppercase; border-radius: 2px;
+    transition: background 0.3s, transform 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); }
+
+  .btn-ghost {
+    color: var(--charcoal); text-decoration: none;
+    padding: 1rem 2rem; font-size: 0.78rem; letter-spacing: 0.18em;
+    text-transform: uppercase; border: 1px solid var(--border); border-radius: 2px;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-stats { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; line-height: 1; }
+  .stat-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 0.3rem; }
+
+  .hero-right { position: relative; height: 100vh; overflow: hidden; }
+  .hero-right img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) saturate(0.85); }
+  .hero-right-overlay { position: absolute; inset: 0; background: linear-gradient(110deg, rgba(248,245,239,0.2) 0%, rgba(28,28,28,0.08) 100%); }
+
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: -2rem;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1.4rem 2rem;
+    box-shadow: 0 12px 40px rgba(28,28,28,0.12);
+  }
+  .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--charcoal); }
+  .badge-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 0.2rem; }
+
+  /* MARQUEE */
+  .marquee-wrap { padding: 1.5rem 0; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--cream-dark); }
+  .marquee-track { display: flex; gap: 3rem; animation: marquee 30s linear infinite; white-space: nowrap; }
+  .marquee-item { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+  .marquee-dot { color: var(--gold); }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* ABOUT */
+  .about-strip { display: grid; grid-template-columns: 1fr 1fr; min-height: 540px; }
+  .about-img-col { position: relative; overflow: hidden; }
+  .about-img-col img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.8s; }
+  .about-img-col:hover img { transform: scale(1.04); }
+  .about-img-col::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 55%, var(--cream) 100%); pointer-events: none; }
+  .about-text-col { padding: 5rem 6% 5rem 4%; display: flex; flex-direction: column; justify-content: center; }
+
+  .section-label {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.2rem; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub { color: var(--muted); font-size: 0.93rem; line-height: 1.9; }
+
+  /* SERVICES */
+  .section { padding: 7rem 5%; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 4rem; }
+  .service-card { background: var(--cream); padding: 3rem 2.5rem; transition: background 0.4s; position: relative; overflow: hidden; }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.4s; }
+  .service-card:hover { background: var(--white); }
+  .service-card:hover::after { width: 100%; }
+  .service-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.6rem; display: block; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; margin-bottom: 0.8rem; line-height: 1.2; }
+  .service-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.85; }
+
+  /* PROCESS */
+  .process-section { padding: 7rem 5%; background: var(--charcoal); color: var(--white); position: relative; overflow: hidden; }
+  .process-img-bg { position: absolute; right: 0; top: 0; width: 40%; height: 100%; object-fit: cover; opacity: 0.1; filter: grayscale(1); display: block; }
+  .process-section .section-label { color: var(--gold-light); }
+  .process-section .section-label::before { background: var(--gold-light); }
+  .process-section .section-title { color: var(--white); max-width: 500px; }
+  .process-section .section-sub { color: rgba(255,255,255,0.42); max-width: 460px; margin-bottom: 4rem; }
+
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; position: relative; z-index: 1; }
+  .step-num { width: 3.2rem; height: 3.2rem; border: 1px solid rgba(184,153,90,0.45); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 1.4rem; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.6rem; color: var(--white); }
+  .step-desc { font-size: 0.84rem; color: rgba(255,255,255,0.42); line-height: 1.85; }
+
+  /* PORTFOLIO */
+  .portfolio-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 300px 300px; gap: 1rem; margin-top: 4rem; }
+  .port-card { position: relative; overflow: hidden; border-radius: 4px; cursor: pointer; }
+  .port-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s; }
+  .port-card:hover img { transform: scale(1.07); }
+  .port-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,28,28,0.82) 0%, rgba(28,28,28,0.08) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; }
+  .port-tag { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.4rem; }
+  .port-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 0.4rem; }
+  .port-desc { font-size: 0.8rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .port-card.large { grid-column: 1 / 3; }
+  .port-card.tall { grid-row: 1 / 3; grid-column: 3 / 4; }
+
+  /* TEAM */
+  .team-section { display: grid; grid-template-columns: 1.1fr 1fr; min-height: 520px; background: var(--cream-dark); }
+  .team-text { padding: 5rem 4% 5rem 6%; display: flex; flex-direction: column; justify-content: center; }
+  .team-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; overflow: hidden; }
+  .team-photo-wrap { overflow: hidden; }
+  .team-photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s; }
+  .team-photo-wrap:hover img { transform: scale(1.06); }
+
+  /* TESTIMONIALS */
+  .testi-section { padding: 7rem 5%; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .testi-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; transition: box-shadow 0.3s, transform 0.3s; }
+  .testi-card:hover { box-shadow: 0 12px 40px rgba(28,28,28,0.07); transform: translateY(-4px); }
+  .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.2em; margin-bottom: 1.2rem; }
+  .testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; font-style: italic; line-height: 1.75; margin-bottom: 1.8rem; }
+  .testi-author { display: flex; align-items: center; gap: 1rem; }
+  .testi-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+  .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .testi-name { font-size: 0.88rem; font-weight: 500; }
+  .testi-role { font-size: 0.76rem; color: var(--muted); }
+
+  /* BOOKING */
+  .booking-section { padding: 7rem 5%; display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: start; }
+  .booking-info { position: sticky; top: 8rem; }
+  .booking-photo { margin-top: 2.5rem; border-radius: 4px; overflow: hidden; height: 260px; position: relative; }
+  .booking-photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.88) saturate(0.85); }
+  .booking-photo-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem; background: linear-gradient(to top, rgba(28,28,28,0.7), transparent); color: rgba(255,255,255,0.85); font-size: 0.78rem; letter-spacing: 0.1em; }
+  .contact-methods { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .contact-method { display: flex; align-items: center; gap: 1.2rem; padding: 1.2rem 1.5rem; border: 1px solid var(--border); border-radius: 4px; text-decoration: none; color: var(--charcoal); transition: border-color 0.3s, background 0.3s, transform 0.2s; }
+  .contact-method:hover { border-color: var(--gold); background: var(--gold-pale); transform: translateX(4px); }
+  .contact-method-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .icon-wa { background: #E8F7F0; }
+  .icon-email { background: var(--gold-pale); }
+  .contact-method-text strong { display: block; font-size: 0.88rem; font-weight: 500; }
+  .contact-method-text span { font-size: 0.78rem; color: var(--muted); }
+
+  .booking-form { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 3rem; box-shadow: var(--shadow); }
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .form-sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 2.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  input, select, textarea { font-family: 'Jost', sans-serif; font-size: 0.9rem; font-weight: 300; padding: 0.85rem 1rem; border: 1px solid var(--border); border-radius: 2px; background: var(--cream); color: var(--charcoal); outline: none; transition: border-color 0.3s, background 0.3s; width: 100%; }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); background: var(--white); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-submit { width: 100%; padding: 1.1rem; background: var(--charcoal); color: var(--white); border: none; border-radius: 2px; font-family: 'Jost', sans-serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; transition: background 0.3s, transform 0.2s; }
+  .form-submit:hover { background: var(--gold); transform: translateY(-2px); }
+  .form-notice { font-size: 0.74rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+  .form-success { display: none; text-align: center; padding: 3rem 1rem; }
+  .success-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.8rem; color: var(--gold); }
+
+  /* FOOTER */
+  footer { background: var(--charcoal); color: var(--white); padding: 5rem 5% 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+  .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.38); margin-top: 1rem; line-height: 1.9; max-width: 280px; }
+  .footer-col-title { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-links a { text-decoration: none; font-size: 0.85rem; color: rgba(255,255,255,0.45); transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+
+  /* FLOATING WA */
+  .float-wa { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(37,211,102,0.4); text-decoration: none; animation: pulse-wa 2.5s infinite; transition: transform 0.3s; }
+  .float-wa:hover { transform: scale(1.1); animation: none; box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+  .float-wa svg { width: 28px; height: 28px; fill: white; }
+  @keyframes pulse-wa { 0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 36px rgba(37,211,102,0.65); } }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 1024px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 55vw; }
+    .hero-badge { left: 1rem; bottom: 2rem; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .about-strip { grid-template-columns: 1fr; }
+    .about-img-col { height: 360px; }
+    .about-img-col::after { background: linear-gradient(to top, var(--cream) 0%, transparent 60%); }
+    .team-section { grid-template-columns: 1fr; }
+    .team-photos { height: 320px; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 260px; }
+    .port-card.large { grid-column: 1 / 3; }
+    .port-card.tall { grid-row: auto; grid-column: auto; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .booking-section { grid-template-columns: 1fr; gap: 3rem; }
+    .booking-info { position: static; }
+    .form-row { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .port-card { height: 260px; }
+    .port-card.large { grid-column: auto; }
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="logo">LUM<span>EX</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#booking" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Premium Web Agency</div>
+    <h1>We craft<br><em>digital luxury</em><br>experiences.</h1>
+    <p class="hero-desc">Bespoke websites and web applications built for brands that refuse to be ordinary. Strategy, design, and development — elevated.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Start Your Project</a>
+      <a href="#work" class="btn-ghost">View Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">120+</div><div class="stat-label">Projects</div></div>
+      <div><div class="stat-num">8</div><div class="stat-label">Years</div></div>
+      <div><div class="stat-num">98%</div><div class="stat-label">Satisfaction</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=85&fit=crop&auto=format" alt="Modern luxury office" loading="eager">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-badge">
+      <div class="badge-num">✦ #1</div>
+      <div class="badge-label">Rated Web Studio</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Luxury Branding</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">Bespoke Web Design</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">E-Commerce Solutions</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">UI / UX Strategy</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">Web Applications</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">SEO &amp; Performance</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">Luxury Branding</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">Bespoke Web Design</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">E-Commerce Solutions</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">UI / UX Strategy</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">Web Applications</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+    <span class="marquee-item">SEO &amp; Performance</span><span class="marquee-dot"> &nbsp;✦&nbsp; </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-img-col">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=85&fit=crop&auto=format" alt="Creative team at work" loading="lazy">
+  </div>
+  <div class="about-text-col reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">A studio built on<br><em>craft &amp; clarity</em></h2>
+    <p class="section-sub" style="margin-bottom:1.4rem;">We are a boutique web studio of designers, developers, and strategists united by one belief — that exceptional digital work changes how people perceive a brand.</p>
+    <p class="section-sub">Every project is led by a senior partner. No handoffs, no juniors, no compromise. Just dedicated expertise from brief to launch.</p>
+    <a href="#booking" class="btn-primary" style="margin-top:2.5rem;display:inline-block;">Work With Us</a>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">Services crafted<br>with <em>precision</em></h2>
+  <p class="section-sub" style="margin-bottom:0;">Every engagement is tailored — no templates, no shortcuts. Just refined digital craftsmanship.</p>
+  <div class="services-grid reveal">
+    <div class="service-card"><span class="service-num">01</span><h3 class="service-name">Luxury Web Design</h3><p class="service-desc">Visually stunning, brand-aligned websites that command attention. Every pixel considered, every interaction intentional.</p></div>
+    <div class="service-card"><span class="service-num">02</span><h3 class="service-name">Web Development</h3><p class="service-desc">High-performance, scalable code on modern stacks. Fast, secure, and engineered to grow with your business.</p></div>
+    <div class="service-card"><span class="service-num">03</span><h3 class="service-name">E-Commerce</h3><p class="service-desc">Premium online stores that convert. From Shopify to custom solutions — selling made sophisticated.</p></div>
+    <div class="service-card"><span class="service-num">04</span><h3 class="service-name">Brand Identity</h3><p class="service-desc">Strategic visual identity systems — logo, typography, color, and guidelines that unify your presence.</p></div>
+    <div class="service-card"><span class="service-num">05</span><h3 class="service-name">UI / UX Design</h3><p class="service-desc">User experiences that are intuitive, beautiful, and drive real business outcomes through research-led design.</p></div>
+    <div class="service-card"><span class="service-num">06</span><h3 class="service-name">Digital Strategy</h3><p class="service-desc">SEO, analytics, and growth planning — we architect the full digital ecosystem your brand deserves.</p></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <img class="process-img-bg" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=70&fit=crop&auto=format" alt="" aria-hidden="true" loading="lazy">
+  <div class="section-label">How We Work</div>
+  <h2 class="section-title">A refined<br><em>process</em></h2>
+  <p class="section-sub">Collaboration, clarity, and craft at every stage of the journey.</p>
+  <div class="process-steps reveal">
+    <div class="process-step"><div class="step-num">01</div><h4 class="step-title">Discovery</h4><p class="step-desc">We immerse in your brand, goals, and audience to form a clear strategic foundation.</p></div>
+    <div class="process-step"><div class="step-num">02</div><h4 class="step-title">Design</h4><p class="step-desc">Concepts crafted with precision — refined through your feedback until perfect.</p></div>
+    <div class="process-step"><div class="step-num">03</div><h4 class="step-title">Development</h4><p class="step-desc">Clean, performant code built for longevity — tested across all devices and browsers.</p></div>
+    <div class="process-step"><div class="step-num">04</div><h4 class="step-title">Launch &amp; Growth</h4><p class="step-desc">We go live together and remain your partner for ongoing improvements and growth.</p></div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="work">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Projects we're<br><em>proud of</em></h2>
+  <div class="portfolio-grid reveal">
+    <div class="port-card large">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1000&q=85&fit=crop&auto=format" alt="Analytics dashboard project" loading="lazy">
+      <div class="port-overlay">
+        <div class="port-tag">E-Commerce · Fashion</div>
+        <h3 class="port-title">Maison Éclat</h3>
+        <p class="port-desc">Full luxury e-commerce redesign — 210% increase in conversions within 3 months.</p>
+      </div>
+    </div>
+    <div class="port-card tall">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=85&fit=crop&auto=format" alt="SaaS platform dashboard" loading="lazy">
+      <div class="port-overlay">
+        <div class="port-tag">SaaS · Technology</div>
+        <h3 class="port-title">Vertex Platform</h3>
+        <p class="port-desc">Enterprise web app with custom design system and dashboard architecture.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=700&q=85&fit=crop&auto=format" alt="Luxury hotel pool" loading="lazy">
+      <div class="port-overlay">
+        <div class="port-tag">Hospitality · Branding</div>
+        <h3 class="port-title">Aurum Hotels</h3>
+        <p class="port-desc">Complete brand identity and booking website for a 5-star boutique group.</p>
+      </div>
+    </div>
+    <div class="port-card">
+      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700&q=85&fit=crop&auto=format" alt="Beauty brand identity" loading="lazy">
+      <div class="port-overlay">
+        <div class="port-tag">Beauty · Identity</div>
+        <h3 class="port-title">Solène Beauty</h3>
+        <p class="port-desc">Minimalist brand identity and editorial e-commerce for a luxury skincare label.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="team-text reveal">
+    <div class="section-label">Our Team</div>
+    <h2 class="section-title">Expert minds,<br><em>passionate craft</em></h2>
+    <p class="section-sub" style="margin-bottom:1.4rem;">A curated team of senior designers, engineers, and brand strategists who bring decades of combined experience to every project.</p>
+    <p class="section-sub">We keep our team intentionally small so every client receives undivided attention and leadership-level execution.</p>
+    <a href="#booking" class="btn-ghost" style="margin-top:2.5rem;display:inline-block;">Work With Us</a>
+  </div>
+  <div class="team-photos">
+    <div class="team-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80&fit=crop&facepad=2.5&auto=format" alt="Team member" loading="lazy">
+    </div>
+    <div class="team-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80&fit=crop&facepad=2.5&auto=format" alt="Team member" loading="lazy">
+    </div>
+    <div class="team-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=80&fit=crop&facepad=2.5&auto=format" alt="Team member" loading="lazy">
+    </div>
+    <div class="team-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80&fit=crop&facepad=2.5&auto=format" alt="Team member" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="section-label">Client Words</div>
+  <h2 class="section-title">What our clients<br><em>say</em></h2>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"LUMEX transformed our digital presence. The attention to detail and quality of their output is unlike any agency we've worked with."</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&q=80&fit=crop&facepad=3&auto=format" alt="Sarah Al-Mansouri" loading="lazy"></div>
+        <div><div class="testi-name">Sarah Al-Mansouri</div><div class="testi-role">CEO, Maison Éclat</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The team understood our vision immediately and delivered a platform that exceeded every expectation. Professional, elegant, results-driven."</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&q=80&fit=crop&facepad=3&auto=format" alt="James Richardson" loading="lazy"></div>
+        <div><div class="testi-name">James Richardson</div><div class="testi-role">CTO, Vertex Technologies</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Booking was seamless, communication impeccable. Our hotel reservations increased by 40% within the first month of launch."</p>
+      <div class="testi-author">
+        <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80&fit=crop&facepad=3&auto=format" alt="Lara Morel" loading="lazy"></div>
+        <div><div class="testi-name">Lara Morel</div><div class="testi-role">Director, Aurum Hotels</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="booking-info">
+    <div class="section-label">Start Today</div>
+    <h2 class="section-title">Let's build<br>something <em>remarkable</em></h2>
+    <p class="section-sub">Book a free consultation and let's explore what we can create together. No pressure, just clarity.</p>
+    <div class="booking-photo">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80&fit=crop&auto=format" alt="Modern studio space" loading="lazy">
+      <div class="booking-photo-caption">Our studio — where great projects begin</div>
+    </div>
+    <div class="contact-methods">
+      <a href="https://wa.me/971503012659?text=Hello%20LUMEX,%20I'd%20like%20to%20discuss%20a%20web%20project." class="contact-method" target="_blank">
+        <div class="contact-method-icon icon-wa">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div class="contact-method-text"><strong>WhatsApp Us</strong><span>Instant replies — chat with our team</span></div>
+      </a>
+      <a href="mailto:aakhilmohamed1@gmail.com?subject=Project%20Enquiry" class="contact-method">
+        <div class="contact-method-icon icon-email">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B8995A" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-method-text"><strong>Email Us</strong><span>aakhilmohamed1@gmail.com — reply within 24h</span></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="booking-form">
+    <div id="form-inner">
+      <h3 class="form-title">Book a Consultation</h3>
+      <p class="form-sub">Tell us about your project and we'll be in touch promptly.</p>
+      <div class="form-row">
+        <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" placeholder="Sara"></div>
+        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Al-Farsi"></div>
+      </div>
+      <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="sara@yourbrand.com"></div>
+      <div class="form-group"><label for="phone">WhatsApp / Phone (optional)</label><input type="tel" id="phone" placeholder="+971 50 000 0000"></div>
+      <div class="form-group">
+        <label for="service">Service Interested In</label>
+        <select id="service">
+          <option value="">Select a service…</option>
+          <option>Luxury Web Design</option>
+          <option>Web Development</option>
+          <option>E-Commerce Solution</option>
+          <option>Brand Identity</option>
+          <option>UI / UX Design</option>
+          <option>Full Project (Design + Dev)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="budget">Project Budget</label>
+        <select id="budget">
+          <option value="">Select range…</option>
+          <option>Under $5,000</option>
+          <option>$5,000 – $15,000</option>
+          <option>$15,000 – $50,000</option>
+          <option>$50,000+</option>
+        </select>
+      </div>
+      <div class="form-group"><label for="message">Tell Us About Your Project</label><textarea id="message" placeholder="Brief description of your vision, goals, and timeline…"></textarea></div>
+      <button class="form-submit" onclick="submitForm()">Send Enquiry →</button>
+      <p class="form-notice">We respond within 24 hours. Your information is kept strictly confidential.</p>
+    </div>
+    <div class="form-success" id="form-success">
+      <div class="success-icon">✦</div>
+      <h3 class="form-title" style="font-size:1.5rem;">Enquiry Received</h3>
+      <p style="color:var(--muted);font-size:0.9rem;margin-top:0.8rem;line-height:1.85;">Thank you for reaching out. Our team will review your project and contact you within 24 hours.<br><br>For a faster reply, message us directly on WhatsApp.</p>
+      <a href="https://wa.me/971503012659" class="btn-primary" style="display:inline-block;margin-top:2rem;" target="_blank">Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="color:var(--white);">LUM<span>EX</span></a>
+      <p>A premium web design and development studio crafting extraordinary digital experiences for brands that lead their industry.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Web Design</a></li><li><a href="#">Development</a></li>
+        <li><a href="#">E-Commerce</a></li><li><a href="#">Brand Identity</a></li>
+        <li><a href="#">UI / UX Design</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About</a></li><li><a href="#">Our Work</a></li>
+        <li><a href="#">Process</a></li><li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="mailto:aakhilmohamed1@gmail.com">aakhilmohamed1@gmail.com</a></li>
+        <li><a href="https://wa.me/971503012659" target="_blank">WhatsApp Us</a></li>
+        <li><a href="#">LinkedIn</a></li><li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 LUMEX Studio. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Service</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/971503012659?text=Hello%20LUMEX,%20I'd%20like%20to%20discuss%20a%20project." class="float-wa" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').style.boxShadow = window.scrollY > 40 ? '0 2px 24px rgba(28,28,28,0.08)' : 'none';
+  });
+
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('service').value;
+    if (!fname) { alert('Please enter your name.'); return; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!service) { alert('Please select a service.'); return; }
+    const lname = document.getElementById('lname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const budget = document.getElementById('budget').value;
+    const message = document.getElementById('message').value.trim();
+    const subject = encodeURIComponent('Project Enquiry — ' + service + ' — ' + fname + ' ' + lname);
+    const body = encodeURIComponent('Name: ' + fname + ' ' + lname + '\nEmail: ' + email + '\nPhone: ' + (phone || 'Not provided') + '\nService: ' + service + '\nBudget: ' + (budget || 'Not specified') + '\n\nMessage:\n' + message);
+    window.location.href = 'mailto:aakhilmohamed1@gmail.com?subject=' + subject + '&body=' + body;
+    document.getElementById('form-inner').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>
